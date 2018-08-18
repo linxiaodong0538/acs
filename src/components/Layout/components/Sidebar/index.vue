@@ -26,23 +26,13 @@
           <Icon :type="menu1.icon" />
           {{ menu1.title }}
         </template>
-        <Submenu
+        <MenuItem
           v-for="(menu2, index2) in menu1.children"
           :key="index2"
-          :name="menu2.name"
+          :name="menu2.route"
         >
-          <template slot="title">
-            <Icon :type="menu2.icon" />
-            {{ menu2.title }}
-          </template>
-          <MenuItem
-            v-for="(menu3, index3) in menu2.children"
-            :key="index3"
-            :name="menu3.route"
-          >
-            {{ menu3.title }}
-          </MenuItem>
-        </Submenu>
+          {{ menu2.title }}
+        </MenuItem>
       </Submenu>
     </Menu>
   </div>

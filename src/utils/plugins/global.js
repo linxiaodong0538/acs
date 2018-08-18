@@ -1,6 +1,6 @@
 import time from 'jt-time'
-import helpers from '../utils/helpers/base'
-import consts from '../utils/consts'
+import helpers from '../helpers/base'
+import consts from '../consts/index'
 
 export default {
   install (Vue) {

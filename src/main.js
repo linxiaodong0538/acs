@@ -6,7 +6,7 @@ import router from './router'
 import '@/utils/init'
 import store from '@/store'
 import iView from 'iview'
-import globalPlugin from './plugins/global'
+import globalPlugin from './utils/plugins/global'
 
 import '@/styles/global/index.scss'
 import '@/styles/iview/index.less'

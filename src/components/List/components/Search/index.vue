@@ -1,12 +1,12 @@
 <template>
   <div class="search">
-    <slot></slot>
+    <slot />
   </div>
 </template>
 
 <script>
   export default {
-    name: 'search'
+    name: 'CListSearch'
   }
 </script>
 
