@@ -5,16 +5,6 @@ import TheLayout from '@/components/Layout'
 import Root from '@/pages/Root'
 import notFound from './routes/notFound'
 import home from './routes/home'
-import articles from './routes/articles'
-import products from './routes/products'
-import cars from './routes/cars'
-import staffs from './routes/staffs'
-import olds from './routes/olds'
-import families from './routes/families'
-import notices from './routes/notices'
-import roles from './routes/roles'
-import permissions from './routes/permissions'
-import settings from './routes/settings'
 import login from './routes/login'
 import logout from './routes/logout'
 import iView from 'iview'
@@ -31,17 +21,7 @@ const router = new Router({
           path: '/',
           component: TheLayout,
           children: [
-            home,
-            articles,
-            products,
-            cars,
-            staffs,
-            olds,
-            families,
-            notices,
-            roles,
-            permissions,
-            settings
+            home
           ],
           meta: {
             requiresAuth: true
