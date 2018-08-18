@@ -14,11 +14,9 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "apples": "^0.0.3",
     "array-to-tree": "^2.2.1",
     "axios": "^0.17.1",
     "core-js": "^2.5.3",
-    "dayjs": "^1.7.4",
     "iview": "^2.13.0",
     "jt-env": "0.0.1",
     "jt-helpers": "0.0.1",
@@ -27,7 +25,6 @@
     "jt-storage": "0.0.2",
     "jt-time": "0.0.1",
     "kindeditor": "^4.1.10",
-    "qrcode": "^1.2.2",
     "sass-utils": "^1.0.10",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
