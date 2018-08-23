@@ -1,5 +1,3 @@
-项目名：基于 vue-cli + iView 的后台管理系统，仓库地址：[https://github.com/zhaotoday/iview](https://github.com/zhaotoday/iview)。负责人：[赵金添@zhaotoday](https://github.com/zhaotoday)。
-
 ## 1. 关于
 
 #### 1.1. 介绍
@@ -25,18 +23,11 @@ Vue、Webpack、ES6、vue-router、Vuex、Sass、PostCSS 等。
 密码：123456
 ```
 
-#### 2.2. 服务端代码
+#### 2.2. 服务端框架
 
-服务端代码也提交到 GitHub 了，可以自己在本地跑起来：
-[https://github.com/zhaotoday/koa-mvc-framework](https://github.com/zhaotoday/koa-mvc-framework)。
+[https://github.com/zhaotoday/less.js](https://github.com/zhaotoday/less.js)
 
-## 3. 运行
-
-#### 3.1. Node 版本
-
-本项目使用了 async/await 等新语法，请保证 Node 版本在 7.6 及以上。
-
-#### 3.2. 命令
+## 3. 命令
 
 ```bash
 # 下载代码
@@ -205,7 +196,7 @@ $ npm install --save vuex
 
 #### 5.4. 业务组件规范
 
-业务组件放在 /src/app 下，也就是一个页面，对应一个路由。规范和公用组件一直。
+业务组件放在 /src/app 下，也就是一个页面，对应一个路由。规范和公用组件一致。
 
 ## 6. 加入 iView 组件库
 
