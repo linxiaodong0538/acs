@@ -284,6 +284,7 @@ $ git clone https://github.com/zhaotoday/update-your-browser.git
 
 - [Vue.js 中文网](https://cn.vuejs.org/)
 - [iView - 一套基于 Vue.js 的高质量 UI 组件库](https://www.iviewui.com/)
+- [Vue.js 风格指南](https://cn.vuejs.org/v2/style-guide/)
 - [vue-router 中文网](http://router.vuejs.org/zh-cn/)
 - [Vuex 中文网](https://vuex.vuejs.org/zh-cn/)
 - [Vuex 通俗版教程](https://yeaseonzhang.github.io/2017/03/16/Vuex-%E9%80%9A%E4%BF%97%E7%89%88/)
@@ -296,5 +297,4 @@ $ git clone https://github.com/zhaotoday/update-your-browser.git
 - [一个极简的轻量级 Sass 工具库](https://github.com/zhaotoday/sass-utils)
 - [AJAX 简单封装及使用规范](https://github.com/zhaotoday/rest)
 - [基于 i18next 实现 Vue js 项目的国际化（整理中）](https://github.com/zhaotoday/i18n)
-- [基于 CodeIgniter 的轻量级 PHP MVC 框架](https://github.com/zhaotoday/php-rich-app)
 - [老版本的浏览器上访问时提示升级](https://github.com/zhaotoday/update-your-browser)
