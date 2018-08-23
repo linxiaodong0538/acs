@@ -8,7 +8,7 @@
     </div>
     <div class="user">admin</div>
     <div class="avatar">
-      <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg"></Avatar>
+      <Avatar style="background-color: #1890ff;" icon="ios-person" />
     </div>
   </div>
 </template>
