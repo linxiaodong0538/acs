@@ -1,45 +1,38 @@
 <template>
   <Card
     class="login"
-    dis-hover
-  >
+    dis-hover>
     <p slot="title">后台管理系统</p>
     <Form
       ref="formValidate"
       :model="formValidate"
       :rules="ruleValidate"
       :label-width="60"
-      label-position="left"
-    >
+      label-position="left">
       <Form-item
         label="账号"
-        prop="telephone"
-      >
+        prop="telephone">
         <Input
           size="large"
           v-model="formValidate.telephone"
           placeholder="请输入手机号"
-          @on-enter="handleLogin"
-        />
+          @on-enter="handleLogin" />
       </Form-item>
       <Form-item
         label="密码"
-        prop="password"
-      >
+        prop="password">
         <Input
           size="large"
           type="password"
           v-model="formValidate.password"
           placeholder="请输入密码"
-          @on-enter="handleLogin"
-        />
+          @on-enter="handleLogin" />
       </Form-item>
       <Form-item>
         <Button
           size="large"
           type="primary"
-          @click="handleLogin"
-        >
+          @click="handleLogin">
           登录
         </Button>
       </Form-item>

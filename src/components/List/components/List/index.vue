@@ -8,15 +8,13 @@
       :columns="columns"
       :data="data"
       :selection="[1]"
-      @on-selection-change="handleSectionChange"
-    />
+      @on-selection-change="handleSectionChange" />
     <Page
       :total="total"
       :current="current"
       :page-size="consts.PAGE_SIZE"
       show-total show-elevator
-      @on-change="handlePageChange"
-    />
+      @on-change="handlePageChange" />
   </div>
 </template>
 

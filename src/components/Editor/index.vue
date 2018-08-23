@@ -4,23 +4,19 @@
     <Modal
       width="400"
       v-model="picture.modal"
-      title="插入图片"
-    >
+      title="插入图片">
       <Form
         ref="formValidate"
         :model="formValidate"
         :rules="ruleValidate"
-        :label-width="80"
-      >
+        :label-width="80">
         <Form-item
           label="图片"
-          prop="picture"
-        >
+          prop="picture">
           <CUploader
             ref="uploader"
             v-model="formValidate.picture"
-            @change="handleUploaderChange"
-          />
+            @change="handleUploaderChange" />
           （尺寸：1150x647）
         </Form-item>
       </Form>
@@ -28,15 +24,13 @@
         <Button
           type="text"
           size="large"
-          @click="picture.modal = false"
-        >
+          @click="picture.modal = false">
           取消
         </Button>
         <Button
           type="primary"
           size="large"
-          @click="handleImageFormOk"
-        >
+          @click="handleImageFormOk">
           确定
         </Button>
       </div>

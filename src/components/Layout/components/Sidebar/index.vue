@@ -2,8 +2,7 @@
   <div class="sidebar">
     <div
       class="logo"
-      @click="$router.push('/')"
-    >
+      @click="$router.push('/')">
       <div class="logo-icon">
         <CIcon type="cube" />
       </div>
@@ -15,13 +14,11 @@
       :active-name="activeName"
       width="auto"
       :open-names="openNames"
-      @on-select="handleSelect"
-    >
+      @on-select="handleSelect">
       <Submenu
         v-for="(menu1, index1) in consts.MENUS"
         :key="index1"
-        :name="menu1.name"
-      >
+        :name="menu1.name">
         <template slot="title">
           <Icon :type="menu1.icon" />
           {{ menu1.title }}
@@ -29,8 +26,7 @@
         <MenuItem
           v-for="(menu2, index2) in menu1.children"
           :key="index2"
-          :name="menu2.route"
-        >
+          :name="menu2.route">
           {{ menu2.title }}
         </MenuItem>
       </Submenu>

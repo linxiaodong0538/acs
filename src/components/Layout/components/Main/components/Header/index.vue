@@ -3,8 +3,7 @@
     <div
       class="logout"
       title="退出"
-      @click="handleLogout"
-    >
+      @click="handleLogout">
       <CIcon type="logout" />
     </div>
     <div class="user">admin</div>

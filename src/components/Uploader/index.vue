@@ -6,8 +6,7 @@
       ref="uploader"
       :max-size="maxSize"
       :format="format"
-      @change="handleUploaderChange"
-    />
+      @change="handleUploaderChange" />
     <CChildUploader
       key="1"
       v-if="hasDefaultFile && value"
@@ -15,20 +14,17 @@
       :value="value"
       :max-size="maxSize"
       :format="format"
-      @change="handleUploaderChange"
-    />
+      @change="handleUploaderChange" />
     <CChildUploader
       key="2"
       v-if="!hasDefaultFile"
       ref="uploader"
       :max-size="maxSize"
       :format="format"
-      @change="handleUploaderChange"
-    />
+      @change="handleUploaderChange" />
     <Input
       :value="value"
-      style="display: none;"
-    />
+      style="display: none;" />
   </div>
 </template>
 
