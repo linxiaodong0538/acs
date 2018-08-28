@@ -1,12 +1,12 @@
 export default [
   {
     icon: 'android-desktop',
-    name: 'website',
+    name: 'categories',
     title: '测试类目管理',
     children: [
       {
         title: '测试类目列表',
-        route: '/website/news/news/articles/categories'
+        route: '/categories/list'
       }
     ]
   },
