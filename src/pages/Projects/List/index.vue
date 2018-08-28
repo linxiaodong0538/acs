@@ -11,10 +11,21 @@
           <Button
             class="margin-right-sm"
             type="primary"
-            @click="handlePost">
+            @click="$router.push('/')">
             新增
           </Button>
         </CListOperations>
+
+        <CListSearch>
+          <Form inline @submit.native.prevent="handleSearch">
+            <Form-item prop="title">
+              <Input type="text" placeholder="请输入标题" v-model="Search.where.title.$like" style="width: 220px;"></Input>
+            </Form-item>
+            <Form-item>
+              <Button type="primary" @click="handleSearch">查询</Button>
+            </Form-item>
+          </Form>
+        </CListSearch>
       </CListHeader>
     </CList>
 
@@ -25,68 +36,60 @@
       @on-ok="handleDelOk">
       <p>确认删除？</p>
     </Modal>
-
-    <Modal
-      width="400"
-      v-model="Form.modal"
-      :title="Form.id ? '编辑' : '新增'">
-      <Form
-        ref="formValidate"
-        :model="Form.formValidate"
-        :rules="Form.ruleValidate"
-        :label-width="80">
-        <Form-item
-          label="名称"
-          prop="name">
-          <Row>
-            <Col span="20">
-              <Input
-                v-model="Form.formValidate.name"
-                placeholder="请输入名称" />
-            </Col>
-          </Row>
-        </Form-item>
-      </Form>
-      <div slot="footer">
-        <Button
-          type="text"
-          size="large"
-          @click="Form.modal = false">
-          取消
-        </Button>
-        <Button
-          type="primary"
-          size="large"
-          @click="handleFormOk">
-          确定
-        </Button>
-      </div>
-    </Modal>
   </div>
 </template>
 
 <script>
   import { mapState } from 'vuex'
-  import CList, { CListHeader, CListOperations } from '@/components/List'
+  import CList, { CListHeader, CListOperations, CListSearch } from '@/components/List'
 
-  const module = 'categories'
+  const module = 'projects'
 
   export default {
-    created () {
+    async created () {
+      this.categoriesList = await this.getCategoriesList()
       this.getList()
     },
     components: {
       CList,
       CListHeader,
-      CListOperations
+      CListOperations,
+      CListSearch
     },
     data () {
       return {
+        categoriesList: [],
         List: {
           columns: [
             {
               title: '名称',
-              key: 'name'
+              key: 'title'
+            },
+            {
+              title: '是否付费产品',
+              key: 'isfree',
+              render: (h, params) => {
+                return h('span', null, this.consts.MAPS.PROJECTS.IS_FREE[params.row.isfree])
+              }
+            },
+            {
+              title: '实际测试量',
+              key: 'usetimes'
+            },
+            {
+              title: '状态',
+              key: 'status',
+              render: (h, params) => {
+                return h('span', null, this.consts.MAPS.PROJECTS.STATUSES[params.row.status])
+              }
+            },
+            {
+              title: '测试类型',
+              key: 'status',
+              render: (h, params) => {
+                const item = this.helpers.getItemById(this.categoriesList, params.row.categoryid)
+                return h('span', null, item.name)
+              }
             },
             {
               title: '操作',
@@ -100,7 +103,7 @@
                     },
                     on: {
                       click: () => {
-                        this.handlePut(params.row)
+                        this.$router.push('/')
                       }
                     }
                   }, '编辑'),
@@ -122,26 +125,16 @@
             current: 1
           }
         },
+        Search: {
+          where: {
+            title: {
+              $like: ''
+            }
+          }
+        },
         Del: {
           id: 0,
           modal: false
-        },
-        Form: {
-          id: 0,
-          modal: false,
-          formValidate: {},
-          ruleValidate: {
-            name: [
-              {
-                required: true,
-                message: '名称不能为空'
-              },
-              {
-                max: 100,
-                message: '名称不能多于 100 个字'
-              }
-            ]
-          }
         }
       }
     },
@@ -149,28 +142,30 @@
       list: state => state[module].list
     }),
     methods: {
+      async getCategoriesList () {
+        const getListRes = await this.$store.dispatch('categories/getList', {
+          query: { offset: 0, limit: 49 }
+        })
+
+        return getListRes.items
+      },
       getList (current = 1) {
         this.List.page.current = current
 
         return this.$store.dispatch(`${module}/getList`, {
           query: {
             offset: (current - 1) * this.consts.PAGE_SIZE,
-            limit: 49 // this.consts.PAGE_SIZE
+            limit: this.consts.PAGE_SIZE,
+            where: this.Search.where
           }
         })
       },
+      handleSearch () {
+        this.List.page.current = 1
+        this.getList()
+      },
       handlePageChange (current) {
         this.getList(current)
-      },
-      handlePost () {
-        this.Form.modal = true
-        this.Form.id = 0
-        this.resetFields()
-      },
-      handlePut (detail) {
-        this.Form.id = detail.id
-        this.$set(this.Form, 'formValidate', { name: detail.name })
-        this.Form.modal = true
       },
       handleDel (id) {
         this.Del.id = id
@@ -180,25 +175,6 @@
         await this.$store.dispatch(`${module}/del`, { id: this.Del.id })
         this.$Message.success('删除成功！')
         this.getList()
-      },
-      handleFormOk () {
-        this.$refs.formValidate.validate(async valid => {
-          if (valid) {
-            await this.$store.dispatch(this.Form.id ? `${module}/put` : `${module}/post`, {
-              id: this.Form.id || '0',
-              body: { name: this.Form.formValidate.name }
-            })
-
-            this.Form.modal = false
-            this.$Message.success((this.Form.id ? '编辑' : '新增') + '成功！')
-            !this.Form.id && this.resetFields()
-            this.getList()
-          }
-        })
-      },
-      resetFields () {
-        this.$refs.formValidate.resetFields()
-        this.$set(this.Form, 'formValidate', {})
       }
     }
   }

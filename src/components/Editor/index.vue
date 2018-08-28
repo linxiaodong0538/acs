@@ -94,7 +94,7 @@
         this.editor.html(html)
       },
       handleImageFormOk () {
-        this.editor.insertHtml(`<img src="${helpers.getImageURLById(this.formValidate.picture)}" />`)
+        this.editor.insertHtml(`<img src="${helpers.getFileURLById(this.formValidate.picture)}" />`)
         this.$refs.uploader.remove()
         this.picture.modal = false
       },

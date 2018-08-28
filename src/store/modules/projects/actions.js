@@ -1,11 +1,14 @@
 import types from './types'
-import Model from '@/models/categories'
+import Model from '@/models/projects'
 
 export default {
   getList ({ commit }, { query }) {
-    return new Model().addPath('list').GET({ query }).then((res) => {
-      commit(types.GET_PROJECTS, {
-        data: { total: 1, items: res.data[0] }
+    return new Promise(resolve => {
+      new Model().addPath('list').GET({ query }).then((res) => {
+        const data = { total: res.data[0].count, items: res.data[0].rows }
+
+        commit(types.GET_PROJECTS, { data })
+        resolve(data)
       })
     })
   },
