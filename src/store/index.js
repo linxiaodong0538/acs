@@ -4,6 +4,8 @@ import getters from './getters'
 import actions from './actions'
 import mutations from './mutations'
 
+import managers from './modules/managers'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -14,5 +16,6 @@ export default new Vuex.Store({
   actions,
   mutations,
   modules: {
+    managers
   }
 })
