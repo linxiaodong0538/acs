@@ -6,6 +6,7 @@ import mutations from './mutations'
 
 import managers from './modules/managers'
 import categories from './modules/categories'
+import projects from './modules/projects'
 
 Vue.use(Vuex)
 
@@ -18,6 +19,7 @@ export default new Vuex.Store({
   mutations,
   modules: {
     managers,
-    categories
+    categories,
+    projects
   }
 })

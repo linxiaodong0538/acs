@@ -8,6 +8,7 @@ import home from './routes/home'
 import login from './routes/login'
 import logout from './routes/logout'
 import categories from './routes/categories'
+import projects from './routes/projects'
 import iView from 'iview'
 
 Vue.use(Router)
@@ -23,7 +24,8 @@ const router = new Router({
           component: TheLayout,
           children: [
             home,
-            categories
+            categories,
+            projects
           ],
           meta: {
             requiresAuth: true
