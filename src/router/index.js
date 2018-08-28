@@ -7,6 +7,7 @@ import notFound from './routes/notFound'
 import home from './routes/home'
 import login from './routes/login'
 import logout from './routes/logout'
+import categories from './routes/categories'
 import iView from 'iview'
 
 Vue.use(Router)
@@ -21,7 +22,8 @@ const router = new Router({
           path: '/',
           component: TheLayout,
           children: [
-            home
+            home,
+            categories
           ],
           meta: {
             requiresAuth: true
