@@ -3,9 +3,9 @@ import Model from '../../../models/categories'
 
 export default {
   getList ({ commit }, { query }) {
-    return new Model().GET({ query }).then((res) => {
+    return new Model().addPath('list').GET({ query }).then((res) => {
       commit(types.GET_CATEGORIES, {
-        data: res.data
+        data: { total: 1, items: res.data[0] }
       })
     })
   },
@@ -18,12 +18,12 @@ export default {
     })
   },
 
-  post ({ commit }, { body }) {
-    return new Model().POST({ body })
+  post ({ commit }, { id, body }) {
+    return new Model().POST({ id, body })
   },
 
   put ({ commit }, { id, body }) {
-    return new Model().PUT({ id, body })
+    return new Model().POST({ id, body })
   },
 
   del ({ commit }, { id }) {
