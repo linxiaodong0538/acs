@@ -54,7 +54,7 @@
       },
 
       handlePageChange (current) {
-        this.$emit('on-change', current)
+        this.$emit('on-page-change', current)
       }
     }
   }

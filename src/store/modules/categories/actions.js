@@ -1,5 +1,5 @@
 import types from './types'
-import Model from '../../../models/categories'
+import Model from '@/models/categories'
 
 export default {
   getList ({ commit }, { query }) {

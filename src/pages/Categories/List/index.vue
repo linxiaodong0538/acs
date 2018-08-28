@@ -1,11 +1,11 @@
 <template>
   <div>
     <CList
-      :current="current"
-      :columns="columns"
+      :columns="List.columns"
       :data="list.items"
-      :total="list.total"
-      @on-change="handlePageChange">
+      :page-total="list.total"
+      :page-current="List.page.current"
+      @on-page-change="handlePageChange">
       <CListHeader>
         <CListOperations>
           <Button
@@ -17,21 +17,23 @@
         </CListOperations>
       </CListHeader>
     </CList>
+
     <Modal
       width="280"
-      v-model="del.modal"
+      v-model="Del.modal"
       title="请确认"
       @on-ok="handleDelOk">
       <p>确认删除？</p>
     </Modal>
+
     <Modal
-      width="500"
-      v-model="modals.form"
-      :title="put.id ? '编辑' : '新增'">
+      width="400"
+      v-model="Form.modal"
+      :title="Form.id ? '编辑' : '新增'">
       <Form
         ref="formValidate"
-        :model="formValidate"
-        :rules="ruleValidate"
+        :model="Form.formValidate"
+        :rules="Form.ruleValidate"
         :label-width="80">
         <Form-item
           label="名称"
@@ -39,7 +41,7 @@
           <Row>
             <Col span="20">
               <Input
-                v-model="formValidate.name"
+                v-model="Form.formValidate.name"
                 placeholder="请输入名称" />
             </Col>
           </Row>
@@ -49,7 +51,7 @@
         <Button
           type="text"
           size="large"
-          @click="modals.form = false">
+          @click="Form.modal = false">
           取消
         </Button>
         <Button
@@ -78,65 +80,67 @@
     },
     data () {
       return {
-        modals: {
-          form: false
+        List: {
+          columns: [
+            {
+              title: '名称',
+              key: 'name'
+            },
+            {
+              title: '操作',
+              key: 'action',
+              width: 150,
+              render: (h, params) => {
+                return h('ButtonGroup', [
+                  h('Button', {
+                    props: {
+                      type: 'ghost'
+                    },
+                    on: {
+                      click: () => {
+                        this.handlePut(params.row)
+                      }
+                    }
+                  }, '编辑'),
+                  h('Button', {
+                    props: {
+                      type: 'ghost'
+                    },
+                    on: {
+                      click: () => {
+                        this.handleDel(params.row.id)
+                      }
+                    }
+                  }, '删除')
+                ])
+              }
+            }
+          ],
+          page: {
+            current: 1
+          }
         },
-        del: {
+        Del: {
           id: 0,
           modal: false
         },
-        put: {
-          id: 0
-        },
-        formValidate: {},
-        ruleValidate: {
-          name: [
-            {
-              required: true,
-              message: '名称不能为空'
-            },
-            {
-              max: 100,
-              message: '名称不能多于 100 个字'
-            }
-          ]
-        },
-        current: 1,
-        columns: [
-          {
-            title: '名称',
-            key: 'name'
-          },
-          {
-            title: '操作',
-            key: 'action',
-            width: 150,
-            render: (h, params) => {
-              return h('ButtonGroup', [
-                h('Button', {
-                  props: {
-                    type: 'ghost'
-                  },
-                  on: {
-                    click: () => {
-                      this.handlePut(params.row)
-                    }
-                  }
-                }, '编辑'),
-                h('Button', {
-                  props: {
-                    type: 'ghost'
-                  },
-                  on: {
-                    click: () => {
-                      this.handleDel(params.row.id)
-                    }
-                  }
-                }, '删除')
-              ])
-            }
+        Form: {
+          id: 0,
+          modal: false,
+          formValidate: {},
+          ruleValidate: {
+            name: [
+              {
+                required: true,
+                message: '名称不能为空'
+              },
+              {
+                max: 100,
+                message: '名称不能多于 100 个字'
+              }
+            ]
           }
-        ]
+        }
       }
     },
     computed: mapState({
@@ -144,7 +148,7 @@
     }),
     methods: {
       getList (current = 1) {
-        this.current = current
+        this.List.page.current = current
 
         return this.$store.dispatch('categories/getList', {
           query: {
@@ -157,47 +161,42 @@
         this.getList(current)
       },
       handlePost () {
-        this.modals.form = true
-        this.put.id = 0
+        this.Form.modal = true
+        this.Form.id = 0
         this.resetFields()
       },
       handlePut (detail) {
-        this.put.id = detail.id
-        this.$set(this, 'formValidate', { name: detail.name })
-        this.modals.form = true
+        this.Form.id = detail.id
+        this.$set(this.Form, 'formValidate', { name: detail.name })
+        this.Form.modal = true
       },
       handleDel (id) {
-        this.del.modal = true
-        this.del.id = id
+        this.Del.id = id
+        this.Del.modal = true
       },
       async handleDelOk () {
-        await this.$store.dispatch('categories/del', {
-          id: this.del.id
-        })
+        await this.$store.dispatch('categories/del', { id: this.Del.id })
         this.$Message.success('删除成功！')
-        // iView.Spin 的坑，调用 iView.Spin.hide()，500ms 后实例才被销毁
-        // await helpers.sleep(500)
         this.getList()
       },
       handleFormOk () {
         this.$refs.formValidate.validate(async valid => {
           if (valid) {
-            await this.$store.dispatch(this.put.id ? 'categories/put' : 'categories/post', {
-              id: this.put.id || '0',
-              body: { name: this.formValidate.name }
+            await this.$store.dispatch(this.Form.id ? 'categories/put' : 'categories/post', {
+              id: this.Form.id || '0',
+              body: { name: this.Form.formValidate.name }
             })
 
-            this.modals.form = false
-
-            this.$Message.success((this.put.id ? '编辑' : '新增') + '成功！')
-            !this.put.id && this.resetFields()
+            this.Form.modal = false
+            this.$Message.success((this.Form.id ? '编辑' : '新增') + '成功！')
+            !this.Form.id && this.resetFields()
             this.getList()
           }
         })
       },
       resetFields () {
         this.$refs.formValidate.resetFields()
-        this.$set(this, 'formValidate', {})
+        this.$set(this.Form, 'formValidate', {})
       }
     }
   }

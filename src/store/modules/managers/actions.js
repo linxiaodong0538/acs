@@ -1,4 +1,4 @@
-import Model from '../../../models/managers'
+import Model from '@/models/managers'
 
 export default {
   post ({ commit }, { body }) {
