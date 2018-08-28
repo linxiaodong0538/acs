@@ -15,7 +15,7 @@
         <Input
           size="large"
           v-model="formValidate.telephone"
-          placeholder="请输入手机号"
+          placeholder="请输入账号"
           @on-enter="handleLogin" />
       </Form-item>
       <Form-item
@@ -42,7 +42,6 @@
 
 <script>
   import auth from '@/utils/auth'
-  import Model from '@/models/actions/login'
 
   export default {
     data () {
@@ -52,7 +51,7 @@
           telephone: [
             {
               required: true,
-              message: '手机号不能为空'
+              message: '账号不能为空'
             }
           ],
           password: [
@@ -68,11 +67,15 @@
       handleLogin () {
         this.$refs.formValidate.validate(async valid => {
           if (valid) {
-            const res = await new Model().POST({
-              body: { ...this.formValidate, type: 'LOGIN' }
+            const { telephone, password } = this.formValidate
+            const postRes = await this.$store.dispatch('managers/post', {
+              body: {
+                username: telephone,
+                loginpw: password
+              }
             })
 
-            auth.login(res.data)
+            auth.login({ user: telephone, token: postRes.data[0].token })
             this.$Message.success('登录成功')
             this.$router.push(this.$route.query.redirect || '/')
           }
