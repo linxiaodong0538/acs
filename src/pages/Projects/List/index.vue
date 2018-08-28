@@ -17,12 +17,22 @@
         </CListOperations>
 
         <CListSearch>
-          <Form inline @submit.native.prevent="handleSearch">
+          <Form
+            inline
+            @submit.native.prevent="handleSearch">
             <Form-item prop="title">
-              <Input type="text" placeholder="请输入标题" v-model="Search.where.title.$like" style="width: 220px;"></Input>
+              <Input
+                type="text"
+                placeholder="请输入标题"
+                v-model="Search.where.title.$like"
+                style="width: 220px;" />
             </Form-item>
             <Form-item>
-              <Button type="primary" @click="handleSearch">查询</Button>
+              <Button
+                type="primary"
+                @click="handleSearch">
+                查询
+              </Button>
             </Form-item>
           </Form>
         </CListSearch>
