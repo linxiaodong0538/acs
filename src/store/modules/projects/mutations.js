@@ -2,9 +2,9 @@ import types from './types'
 
 export default {
   [types.GET_PROJECTS] (state, payload) {
-    state.projects = payload.data
+    state.list = payload.data
   },
   [types.GET_PROJECT] (state, payload) {
-    state.project = payload.data
+    state.detail = payload.data
   }
 }

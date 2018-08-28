@@ -69,6 +69,8 @@
   import { mapState } from 'vuex'
   import CList, { CListHeader, CListOperations } from '@/components/List'
 
+  const module = 'categories'
+
   export default {
     created () {
       this.getList()
@@ -144,13 +146,13 @@
       }
     },
     computed: mapState({
-      list: state => state.categories.categories
+      list: state => state[module].list
     }),
     methods: {
       getList (current = 1) {
         this.List.page.current = current
 
-        return this.$store.dispatch('categories/getList', {
+        return this.$store.dispatch(`${module}/getList`, {
           query: {
             offset: (current - 1) * this.consts.PAGE_SIZE,
             limit: 49 // this.consts.PAGE_SIZE
@@ -175,14 +177,14 @@
         this.Del.modal = true
       },
       async handleDelOk () {
-        await this.$store.dispatch('categories/del', { id: this.Del.id })
+        await this.$store.dispatch(`${module}/del`, { id: this.Del.id })
         this.$Message.success('删除成功！')
         this.getList()
       },
       handleFormOk () {
         this.$refs.formValidate.validate(async valid => {
           if (valid) {
-            await this.$store.dispatch(this.Form.id ? 'categories/put' : 'categories/post', {
+            await this.$store.dispatch(this.Form.id ? `${module}/put` : `${module}/post`, {
               id: this.Form.id || '0',
               body: { name: this.Form.formValidate.name }
             })

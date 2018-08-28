@@ -12,12 +12,12 @@ export default [
   },
   {
     icon: 'android-desktop',
-    name: 'website',
+    name: 'projects',
     title: '测试题管理',
     children: [
       {
         title: '测试题列表',
-        route: '/website/news/news/articles/categories'
+        route: '/projects/list'
       }
     ]
   },
