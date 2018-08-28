@@ -17,7 +17,6 @@
             ref="uploader"
             v-model="formValidate.picture"
             @change="handleUploaderChange" />
-          （尺寸：1150x647）
         </Form-item>
       </Form>
       <div slot="footer">
