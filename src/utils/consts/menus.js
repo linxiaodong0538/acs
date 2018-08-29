@@ -23,12 +23,16 @@ export default [
   },
   {
     icon: 'android-desktop',
-    name: 'website',
+    name: 'userManage',
     title: '用户管理',
     children: [
       {
+        title: '用户管理',
+        route: '/userManage/list'
+      },
+      {
         title: '用户详情',
-        route: '/website/news/news/articles/categories'
+        route: '/userManage/detail'
       }
     ]
   },
