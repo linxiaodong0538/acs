@@ -10,7 +10,7 @@ import logout from './routes/logout'
 import categories from './routes/categories'
 import projects from './routes/projects'
 import iView from 'iview'
-// import userManage from './routes/userManage'
+import userManage from './routes/userManage'
 
 Vue.use(Router)
 
@@ -26,7 +26,8 @@ const router = new Router({
           children: [
             home,
             categories,
-            projects
+            projects,
+            userManage
           ],
           meta: {
             requiresAuth: true
