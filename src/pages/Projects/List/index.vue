@@ -68,7 +68,7 @@
     },
     data () {
       return {
-        categoriesList: [],
+        categoriesList: {},
         List: {
           columns: [
             {
@@ -97,7 +97,7 @@
               title: '测试类型',
               key: 'status',
               render: (h, params) => {
-                const item = this.helpers.getItemById(this.categoriesList, params.row.categoryid)
+                const item = this.helpers.getItemById(this.categoriesList.items, params.row.categoryid)
                 return h('span', null, item.name)
               }
             },
@@ -153,11 +153,9 @@
     }),
     methods: {
       async getCategoriesList () {
-        const getListRes = await this.$store.dispatch('categories/getList', {
+        return this.$store.dispatch('categories/getList', {
           query: { offset: 0, limit: 49 }
         })
-
-        return getListRes.items
       },
       getList (current = 1) {
         this.List.page.current = current
