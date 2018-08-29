@@ -6,7 +6,6 @@ export default {
     return new Promise(resolve => {
       new Model().addPath('list').GET({ query }).then((res) => {
         const data = { total: res.data[0].count, items: res.data[0].rows }
-
         commit(types.GET_PROJECTS, { data })
         resolve(data)
       })
