@@ -200,9 +200,6 @@
         this.$refs.formValidate.resetFields()
         this.$set(this.Form, 'formValidate', {})
       }
-    },
-    mounted () {
-      console.log(this.list)
     }
   }
 </script>

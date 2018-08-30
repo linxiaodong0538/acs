@@ -11,4 +11,23 @@ export default {
       })
     })
   }
+  // getDetail ({ commit }, { id }) {
+  //   return new Model().GET({ id }).then((res) => {
+  //     commit(types.GET_MANAGE, {
+  //       data: res.data
+  //     })
+  //   })
+  // },
+
+  // post ({ commit }, { id, body }) {
+  //   return new Model().POST({ id, body })
+  // },
+
+  // put ({ commit }, { id, body }) {
+  //   return new Model().POST({ id, body })
+  // },
+
+  // del ({ commit }, { id }) {
+  //   return new Model().DELETE({ id })
+  // }
 }

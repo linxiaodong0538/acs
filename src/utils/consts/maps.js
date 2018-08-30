@@ -8,5 +8,11 @@ export default {
       0: '下架',
       1: '上架'
     }
+  },
+  USERMANAGE: {
+    GENDER: {
+      0: '男',
+      1: '女'
+    }
   }
 }

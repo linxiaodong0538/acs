@@ -1,73 +1,139 @@
 <template>
 <div>
+
+    <CListHeader>用户管理</CListHeader>
     <Row>
-        <i-Col span="24" class="header">用户详细</i-Col>
+        <Col span="24">
+            <Input placeholder="请输入搜索关键词" size="small" style="width: 150px" />
+            <Button type="primary" size="small">搜索</Button>
+                <Select size="small" style="width:100px" class="select-offset">
+                  <Option value='1' >无数据</Option>
+                </Select>
+                <Select size="small" style="width:100px">
+                  <Option value='1' >xxx</Option>
+                </Select>
+        </Col>
     </Row>
-      <Row>
-        <i-Col span="16"> 
-            <Table border :columns="columns1" ></Table>
-        </i-Col>
-    </Row>
-    
-   
-    </div>
+    <CList :columns='columns' :data='list.items'></CList>  
+    <CListNavigation></CListNavigation>
+</div>
    
 </template>
     <script>
-    import { mapState } from 'vuex'
+import { mapState } from 'vuex'
+import CList, {
+  CListHeader,
+  CListOperations,
+  CListSearch,
+  CListNavigation
+} from '@/components/List'
 
 const module = 'userManage'
 
 export default {
+  components: {
+    CList,
+    CListHeader,
+    CListOperations,
+    CListSearch,
+    CListNavigation
+  },
   data () {
-        return {
-          columns1: [
-            {
-              title: '用户昵称',
-              key: 'name'
-            },
-            {
-              title: 'xxxx',
-              key: 'age'
-            },
-            {
-              title: '用户头像',
-              key: 'address'
-            },
-            {
-              title: '照片',
-              key: 'address'
-            }
-          ]
+    return {
+      columns: [
+        {
+          title: '用户头像',
+          key: 'avatar',
+          align: 'center',
+          render: (h, params) => {
+            return h('img', {
+              attrs: {
+                src: params.row.avatar,
+                style: 'width: 35px;height: 35px;border-radius: 2px;vertical-align: middle;'
+              }
+            })
+          }
+        },
+        {
+          title: '用户昵称',
+          key: 'nickname'
+        },
+        {
+          title: '是否付费用户',
+          key: 'address'
+        },
+        {
+          title: '使用次数',
+          key: 'name'
+        },
+        {
+          title: '用户手机号',
+          key: 'phone'
+        },
+        {
+          title: '性别',
+          key: 'gender',
+          render: (h, params) => {
+            return h(
+              'span',
+              this.consts.MAPS.USERMANAGE.GENDER[params.row.gender]
+            )
+          }
+        },
+        {
+          title: '操作',
+          key: 'address',
+          align: 'center',
+          render: (h, params) => {
+            return h(
+              'span',
+              {
+                attrs: {
+                  style: 'color:#5666BE; cursor:pointer'
+                },
+                on: {
+                  click: () => {
+                    this.$router.push('/userManage/detail')
+                  }
+                }
+              }, '查看')
+          }
         }
+      ]
+    }
   },
   created () {
-        this.getList()
-      },
+    this.getList()
+  },
   computed: mapState({
-        list: state => state[module].list
+    list: state => state[module].list
   }),
   methods: {
-        getList (current = 1) {
-          this.List.page.current = current
-          return this.$store.dispatch(`${module}/getList`, {
-            query: {}
-          })
+    getList (current = 1) {
+      // this.List.page.current = current
+      return this.$store.dispatch(`${module}/getList`, {
+        query: {
+          offset: (current - 1) * this.consts.PAGE_SIZE,
+          limit: 49
         }
+      })
+    },
+    handlePageChange () {}
   },
-  mounted () {
-    
-  }
+  mounted () {}
 }
 </script>
 
-<style>
-.header {
-  background: #f8f8f9;
-  padding: 12px;
-}
+<style lang="scss" scoped="" type="text/css">
+
 .ivu-table-wrapper {
   margin-top: 50px;
+}
+.ivu-row {
+  padding-top: 10px;
+}
+.select-offset {
+  margin-left:20px;
 }
 </style>
 
