@@ -14,47 +14,51 @@
    
 </template>
     <script>
-import { mapState } from "vuex";
+    import { mapState } from 'vuex'
 
-const module = "userManage";
+const module = 'userManage'
 
 export default {
-  data() {
-    return {
-      columns1: [
-        {
-          title: "用户昵称",
-          key: "name"
-        },
-        {
-          title: "xxxx",
-          key: "age"
-        },
-        {
-          title: "用户头像",
-          key: "address"
-        },
-        {
-          title: "照片",
-          key: "address"
+  data () {
+        return {
+          columns1: [
+            {
+              title: '用户昵称',
+              key: 'name'
+            },
+            {
+              title: 'xxxx',
+              key: 'age'
+            },
+            {
+              title: '用户头像',
+              key: 'address'
+            },
+            {
+              title: '照片',
+              key: 'address'
+            }
+          ]
         }
-      ]
-    };
   },
+  created () {
+        this.getList()
+      },
   computed: mapState({
-    list: state => state[module].list
+        list: state => state[module].list
   }),
   methods: {
-    getList(current = 1) {
-      this.List.page.current = current;
-      return this.$store.dispatch(`${module}/getList`, {
-        query: {
-
+        getList (current = 1) {
+          this.List.page.current = current
+          return this.$store.dispatch(`${module}/getList`, {
+            query: {}
+          })
         }
-      });
-    }
+  },
+  mounted () {
+    
   }
-};
+}
 </script>
 
 <style>
