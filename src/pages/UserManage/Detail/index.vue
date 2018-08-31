@@ -4,11 +4,13 @@
      <CListHeader>用户详细</CListHeader>
       <table>
           <tbody>
-            <tr v-for ='(user,index) in users' :key='index'>
-              <td >{{user.name}}</td>
-               <td >{{user.age}}</td>
-                <td >{{user.school}}</td>
-            </tr>
+            <tr><td >用户昵称</td><td >{{users[0].age}}</td> <td >用户头像</td><td ><img :src='users[0].img' alt=""></td> </tr>
+            <tr><td >用户昵称</td><td >{{users[0].age}}</td> <td >用户头像</td><td >{{users[0].test1}}</td> </tr>
+            <tr><td >用户昵称</td><td >{{users[0].age}}</td> <td >用户头像</td><td >{{users[0].test1}}</td> </tr>
+            <tr><td >用户昵称</td><td >{{users[0].age}}</td> <td >用户头像</td><td >{{users[0].test1}}</td> </tr>
+            <tr><td >用户昵称</td><td >{{users[0].age}}</td> <td >用户头像</td><td >{{users[0].test1}}</td> </tr>
+            <tr><td >用户昵称</td><td >{{users[0].age}}</td> <td >用户头像</td><td >{{users[0].test1}}</td> </tr>
+            <tr><td >用户昵称</td><td colspan="3">{{users[0].age}}</td></tr>
           </tbody>
       </table>
 </div>
@@ -36,19 +38,33 @@ export default {
   data () {
     return {
       users: [
-        { name: '李磊', age: '25', school: '洛阳理工' },
-        { name: '张成', age: '23', school: '桂林电子科技' },
-        { name: '炼心', age: '22', school: '江西电子科技' },
-        { name: '炼心' }
+        {
+          name: '李磊',
+          age: '25',
+          school: '洛阳理工',
+          aa: '12',
+          xb: '男',
+          iphone: '11111',
+          test1: '解决',
+          test2: '解决1',
+          test3: '解决2',
+          test4: '解决3',
+          test5: '解决4',
+          test6: '解决5',
+          img:
+            'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKqJ9k8UI3xCuJiacgNb1ibYj7OS8JMMYqswYAKrL3K6bVUZHgvNHp6vmp5CsgDB36E3mrxwjm8nWow/132'
+        }
       ]
     }
   },
   created () {
-    this.getList()
+    this.getDetail()
   },
-  computed: mapState({
-    list: state => state[module].list
-  }),
+  computed: {
+    ...mapState({
+      list: state => state[module].list
+    })
+  },
   methods: {
     getList (current = 1) {
       // this.List.page.current = current
@@ -59,35 +75,19 @@ export default {
         }
       })
     },
+    getDetail () {
+      return this.$store.dispatch(`${module}/getDetail`, { id: 1 })
+    },
+
     handlePageChange () {}
   },
-  mounted () {
-    console.log()
-  }
+
+  mounted () {}
 }
 </script>
 
-<style>
-.header {
-  background: #f8f8f9;
-  line-height: 48px;
-  padding-left: 10px;
-}
-.ivu-table-wrapper {
-  margin-top: 50px;
-}
-table,
-table tr th,
-table tr td {
-  border: 1px solid #cdcdcd;
-}
-table {
-  width: 600px;
-  min-height: 250px;
-  line-height: 25px;
-  text-align: center;
-  border-collapse: collapse;
-}
+
+<style lang="scss" scoped src="./styles/index.scss">
 </style>
 
 

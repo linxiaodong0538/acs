@@ -8,7 +8,7 @@
       :columns="columns"
       :data="data"
       :selection="[1]"
-      @on-selection-change="handleSectionChange" />
+      @on-selection-change="handleSectionChange"/>
     <Page
       :total="total"
       :current="current"
@@ -40,7 +40,7 @@
       },
       total: {
         type: Number,
-        default: 0
+        default: 1
       }
     },
     data () {

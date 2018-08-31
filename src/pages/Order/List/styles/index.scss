@@ -1,5 +1,7 @@
 @import "../../../../styles/utils/index";
 
+@import "../../../../styles/utils/index";
+
 .header {
   background: #f8f8f9;
   line-height: 48px;
@@ -9,8 +11,8 @@
 .ivu-row {
   padding-top: 10px;
   margin-bottom: 50px;
-}
-
-.select-offset {
-  margin-left: 20px;
+  .ivu-date-picker {
+      float: right;
+      margin-right: 20%;
+  }
 }

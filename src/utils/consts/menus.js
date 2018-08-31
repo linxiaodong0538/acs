@@ -43,7 +43,7 @@ export default [
     children: [
       {
         title: '订单列表',
-        route: '/website/news/news/articles/categories'
+        route: '/order/list'
       }
     ]
   },

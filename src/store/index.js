@@ -8,6 +8,7 @@ import managers from './modules/managers'
 import categories from './modules/categories'
 import projects from './modules/projects'
 import userManage from './modules/userManage'
+import order from './modules/order/'
 
 Vue.use(Vuex)
 
@@ -22,6 +23,7 @@ export default new Vuex.Store({
     managers,
     categories,
     projects,
-    userManage
+    userManage,
+    order
   }
 })

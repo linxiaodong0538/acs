@@ -1,23 +1,24 @@
 <template>
 <div>
-
-    <CListHeader>用户管理</CListHeader>
-    <Row>
-        <Col span="24">
-            <Input placeholder="请输入搜索关键词" size="small" style="width: 150px" />
-            <Button type="primary" size="small">搜索</Button>
-                <Select size="small" style="width:100px" class="select-offset">
-                  <Option value='1' >无数据</Option>
+    <CList :columns='columns' :data='list.items'>
+        <CListHeader>用户管理</CListHeader>
+        <Row>
+          <Col span="24">
+            <Input placeholder="请输入搜索关键词" style="width: 200px" />
+            <Button type="primary">搜索</Button>
+                <Select style="width:120px" class="select-offset">
+                  <Option value='付费用户'>付费用户</Option>
+                  <Option value='非付用户'>非付用户</Option>
+                  <Option value='女性用户'>女性用户</Option>
+                  <Option value='男性用户'>男性用户</Option>
                 </Select>
-                <Select size="small" style="width:100px">
+                <Select style="width:120px">
                   <Option value='1' >xxx</Option>
                 </Select>
-        </Col>
-    </Row>
-    <CList :columns='columns' :data='list.items'></CList>  
-    <CListNavigation></CListNavigation>
+          </Col>
+      </Row>
+      </CList>  
 </div>
-   
 </template>
     <script>
 import { mapState } from 'vuex'
@@ -49,7 +50,8 @@ export default {
             return h('img', {
               attrs: {
                 src: params.row.avatar,
-                style: 'width: 35px;height: 35px;border-radius: 2px;vertical-align: middle;'
+                style:
+                  'width: 35px;height: 35px;border-radius: 2px;vertical-align: middle;'
               }
             })
           }
@@ -96,7 +98,9 @@ export default {
                     this.$router.push('/userManage/detail')
                   }
                 }
-              }, '查看')
+              },
+              '查看'
+            )
           }
         }
       ]
@@ -105,9 +109,15 @@ export default {
   created () {
     this.getList()
   },
-  computed: mapState({
-    list: state => state[module].list
-  }),
+  // computed: mapState({
+  //   list: state => state[module].list
+  // }),
+  computed: {
+    ...mapState({
+      list: state => state[module].list
+    })
+  },
+
   methods: {
     getList (current = 1) {
       // this.List.page.current = current
@@ -124,17 +134,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped="" type="text/css">
-
-.ivu-table-wrapper {
-  margin-top: 50px;
-}
-.ivu-row {
-  padding-top: 10px;
-}
-.select-offset {
-  margin-left:20px;
-}
+<style lang="scss" scoped src="./styles/index.scss">
 </style>
 
 
