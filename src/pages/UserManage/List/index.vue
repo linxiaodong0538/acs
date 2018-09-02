@@ -2,8 +2,7 @@
 <div>
     <CList :columns='columns' :data='list.items'>
         <CListHeader>用户管理</CListHeader>
-        <Row>
-          <Col span="24">
+        <CListSearch>
             <Input placeholder="请输入搜索关键词" style="width: 200px" />
             <Button type="primary">搜索</Button>
                 <Select style="width:120px" class="select-offset">
@@ -15,19 +14,13 @@
                 <Select style="width:120px">
                   <Option value='1' >xxx</Option>
                 </Select>
-          </Col>
-      </Row>
-      </CList>  
+        </CListSearch>  
+    </CList>  
 </div>
 </template>
-    <script>
+<script>
 import { mapState } from 'vuex'
-import CList, {
-  CListHeader,
-  CListOperations,
-  CListSearch,
-  CListNavigation
-} from '@/components/List'
+import CList, { CListHeader, CListSearch } from '@/components/List'
 
 const module = 'userManage'
 
@@ -35,9 +28,7 @@ export default {
   components: {
     CList,
     CListHeader,
-    CListOperations,
-    CListSearch,
-    CListNavigation
+    CListSearch
   },
   data () {
     return {
@@ -66,7 +57,7 @@ export default {
         },
         {
           title: '使用次数',
-          key: 'name'
+          key: 'usetimes'
         },
         {
           title: '用户手机号',
@@ -88,10 +79,11 @@ export default {
           align: 'center',
           render: (h, params) => {
             return h(
-              'span',
+              'Button',
               {
-                attrs: {
-                  style: 'color:#5666BE; cursor:pointer'
+                props: {
+                  type: 'primary',
+                  size: 'small'
                 },
                 on: {
                   click: () => {
