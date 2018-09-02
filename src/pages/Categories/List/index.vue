@@ -66,35 +66,37 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
-  import CList, { CListHeader, CListOperations } from '@/components/List'
+import { mapState } from 'vuex'
+import CList, { CListHeader, CListOperations } from '@/components/List'
 
-  const module = 'categories'
+const module = 'categories'
 
-  export default {
-    created () {
-      this.getList()
-    },
-    components: {
-      CList,
-      CListHeader,
-      CListOperations
-    },
-    data () {
-      return {
-        List: {
-          columns: [
-            {
-              title: '名称',
-              key: 'name'
-            },
-            {
-              title: '操作',
-              key: 'action',
-              width: 150,
-              render: (h, params) => {
-                return h('ButtonGroup', [
-                  h('Button', {
+export default {
+  created () {
+    this.getList()
+  },
+  components: {
+    CList,
+    CListHeader,
+    CListOperations
+  },
+  data () {
+    return {
+      List: {
+        columns: [
+          {
+            title: '名称',
+            key: 'name'
+          },
+          {
+            title: '操作',
+            key: 'action',
+            width: 150,
+            render: (h, params) => {
+              return h('ButtonGroup', [
+                h(
+                  'Button',
+                  {
                     props: {
                       type: 'ghost'
                     },
@@ -103,8 +105,12 @@
                         this.handlePut(params.row)
                       }
                     }
-                  }, '编辑'),
-                  h('Button', {
+                  },
+                  '编辑'
+                ),
+                h(
+                  'Button',
+                  {
                     props: {
                       type: 'ghost'
                     },
@@ -113,93 +119,103 @@
                         this.handleDel(params.row.id)
                       }
                     }
-                  }, '删除')
-                ])
-              }
+                  },
+                  '删除'
+                )
+              ])
             }
-          ],
-          page: {
-            current: 1
           }
-        },
-        Del: {
-          id: 0,
-          modal: false
-        },
-        Form: {
-          id: 0,
-          modal: false,
-          formValidate: {},
-          ruleValidate: {
-            name: [
-              {
-                required: true,
-                message: '名称不能为空'
-              },
-              {
-                max: 100,
-                message: '名称不能多于 100 个字'
-              }
-            ]
-          }
+        ],
+        page: {
+          current: 1
+        }
+      },
+      Del: {
+        id: 0,
+        modal: false
+      },
+      Form: {
+        id: 0,
+        modal: false,
+        formValidate: {},
+        ruleValidate: {
+          name: [
+            {
+              required: true,
+              message: '名称不能为空'
+            },
+            {
+              max: 100,
+              message: '名称不能多于 100 个字'
+            }
+          ]
         }
       }
-    },
-    computed: mapState({
-      list: state => state[module].list
-    }),
-    methods: {
-      getList (current = 1) {
-        this.List.page.current = current
+    }
+  },
+  computed: mapState({
+    list: state => state[module].list
+  }),
+  methods: {
+    getList (current = 1) {
+      this.List.page.current = current
 
-        return this.$store.dispatch(`${module}/getList`, {
-          query: {
-            offset: (current - 1) * this.consts.PAGE_SIZE,
-            limit: 49 // this.consts.PAGE_SIZE
-          }
-        })
-      },
-      handlePageChange (current) {
-        this.getList(current)
-      },
-      handlePost () {
-        this.Form.modal = true
-        this.Form.id = 0
-        this.resetFields()
-      },
-      handlePut (detail) {
-        this.Form.id = detail.id
-        this.$set(this.Form, 'formValidate', { name: detail.name })
-        this.Form.modal = true
-      },
-      handleDel (id) {
-        this.Del.id = id
-        this.Del.modal = true
-      },
-      async handleDelOk () {
-        await this.$store.dispatch(`${module}/del`, { id: this.Del.id })
-        this.$Message.success('删除成功！')
-        this.getList()
-      },
-      handleFormOk () {
-        this.$refs.formValidate.validate(async valid => {
-          if (valid) {
-            await this.$store.dispatch(this.Form.id ? `${module}/put` : `${module}/post`, {
+      return this.$store.dispatch(`${module}/getList`, {
+        query: {
+          offset: (current - 1) * this.consts.PAGE_SIZE,
+          limit: 49 // this.consts.PAGE_SIZE
+        }
+      })
+    },
+    handlePageChange (current) {
+      this.getList(current)
+    },
+    handlePost () {
+      this.Form.modal = true
+      this.Form.id = 0
+      this.resetFields()
+    },
+    handlePut (detail) {
+      this.Form.id = detail.id
+      console.log(this)
+
+      this.$set(this.Form, 'formValidate', { name: detail.name })
+      this.Form.modal = true
+    },
+    handleDel (id) {
+      this.Del.id = id
+      this.Del.modal = true
+    },
+    async handleDelOk () {
+      await this.$store.dispatch(`${module}/del`, { id: this.Del.id })
+      this.$Message.success('删除成功！')
+      this.getList()
+    },
+    handleFormOk () {
+      this.$refs.formValidate.validate(async valid => {
+        if (valid) {
+          await this.$store.dispatch(
+            this.Form.id ? `${module}/put` : `${module}/post`,
+            {
               id: this.Form.id || '0',
               body: { name: this.Form.formValidate.name }
-            })
+            }
+          )
 
-            this.Form.modal = false
-            this.$Message.success((this.Form.id ? '编辑' : '新增') + '成功！')
-            !this.Form.id && this.resetFields()
-            this.getList()
-          }
-        })
-      },
-      resetFields () {
-        this.$refs.formValidate.resetFields()
-        this.$set(this.Form, 'formValidate', {})
-      }
+          this.Form.modal = false
+          this.$Message.success((this.Form.id ? '编辑' : '新增') + '成功！')
+          !this.Form.id && this.resetFields()
+          this.getList()
+        }
+      })
+    },
+    resetFields () {
+      this.$refs.formValidate.resetFields()
+      this.$set(this.Form, 'formValidate', {})
     }
   }
+}
 </script>
+<style>
+</style>
+

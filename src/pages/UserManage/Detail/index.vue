@@ -18,22 +18,14 @@
 </template>
     <script>
 import { mapState } from 'vuex'
-import CList, {
-  CListHeader,
-  CListOperations,
-  CListSearch,
-  CListNavigation
-} from '@/components/List'
+import CList, { CListHeader } from '@/components/List'
 
 const module = 'userManage'
 
 export default {
   components: {
     CList,
-    CListHeader,
-    CListOperations,
-    CListSearch,
-    CListNavigation
+    CListHeader
   },
   data () {
     return {
@@ -45,14 +37,13 @@ export default {
           aa: '12',
           xb: '男',
           iphone: '11111',
-          test1: '解决',
-          test2: '解决1',
-          test3: '解决2',
-          test4: '解决3',
-          test5: '解决4',
-          test6: '解决5',
-          img:
-            'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKqJ9k8UI3xCuJiacgNb1ibYj7OS8JMMYqswYAKrL3K6bVUZHgvNHp6vmp5CsgDB36E3mrxwjm8nWow/132'
+          test1: '测试',
+          test2: '测试1',
+          test3: '测试2',
+          test4: '测试3',
+          test5: '测试4',
+          test6: '测试5',
+          img: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKqJ9k8UI3xCuJiacgNb1ibYj7OS8JMMYqswYAKrL3K6bVUZHgvNHp6vmp5CsgDB36E3mrxwjm8nWow/132'
         }
       ]
     }
@@ -77,11 +68,8 @@ export default {
     },
     getDetail () {
       return this.$store.dispatch(`${module}/getDetail`, { id: 1 })
-    },
-
-    handlePageChange () {}
+    }
   },
-
   mounted () {}
 }
 </script>

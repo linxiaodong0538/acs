@@ -1,6 +1,5 @@
 @import "../../../../styles/utils/index";
 
-@import "../../../../styles/utils/index";
 
 .header {
   background: #f8f8f9;
@@ -8,9 +7,12 @@
   padding-left: 10px;
 }
 
+.search {
+  position: static !important;
+}
 .ivu-row {
   padding-top: 10px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   .ivu-date-picker {
       float: right;
       margin-right: 20%;
