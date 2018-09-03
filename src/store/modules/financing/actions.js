@@ -5,7 +5,7 @@ export default {
   getList ({ commit }, { query }) {
     return new Promise(resolve => {
       new Model().addPath('list').GET({ query }).then((res) => {
-        const data = {total: 1, items: res.data[0].rows}
+        const data = {total: res.data[0].count, items: res.data[0].rows}
         commit(types.GET_FINANCINGS, { data })
         resolve(data)
       })

@@ -1,7 +1,7 @@
 <template>
   <div>
     <CListHeader>财务管理</CListHeader>
-    <CList :columns=columns1 :data="list.items">
+    <CList :columns=columns1 :data="list.items" :total="list.total" :current="page.current" @on-page-change="handlePageChange">
       <Row>
         <Col span="4">
         <Card>
@@ -80,10 +80,7 @@ export default {
           title: '状态',
           key: 'status',
           render: (h, params) => {
-            return h(
-              'span',
-              this.consts.MAPS.ORDER.STATUS[params.row.status]
-            )
+            return h('span', this.consts.MAPS.ORDER.STATUS[params.row.status])
           }
         },
         {
@@ -94,6 +91,7 @@ export default {
           title: '操作',
           key: '',
           align: 'center',
+          width: 200,
           render: (h, params) => {
             return h(
               'Button',
@@ -105,10 +103,15 @@ export default {
                 on: {
                   click: () => {}
                 }
-              }, '退款')
+              },
+              '退款'
+            )
           }
         }
-      ]
+      ],
+      page: {
+        current: 1
+      }
     }
   },
 
@@ -124,11 +127,19 @@ export default {
 
   methods: {
     getList (current = 1) {
-      // this.List.page.current = current
-      return this.$store.dispatch(`${module}/getList`, {})
+      this.page.current = current
+      return this.$store.dispatch(`${module}/getList`, {
+        query: {
+          // offset: (current - 1) * this.consts.PAGE_SIZE,
+          // limit: this.consts.PAGE_SIZE
+        }
+      })
     },
     getDate (value) {
       this.showDate = value
+    },
+    handlePageChange (current) {
+      this.getList(current)
     }
   },
   filters: {

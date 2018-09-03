@@ -1,6 +1,6 @@
 <template>
   <div>
-     <CList :columns="columns1" :data="list.items">
+     <CList :columns="columns1" :data="list.items" :total="list.total">
           <CListHeader>订单管理</CListHeader>
           <Row>
             <Col span="24">
