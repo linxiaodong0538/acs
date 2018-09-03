@@ -12,6 +12,7 @@ import projects from './routes/projects'
 import iView from 'iview'
 import userManage from './routes/userManage'
 import order from './routes/order'
+import financing from './routes/financing'
 
 Vue.use(Router)
 
@@ -29,7 +30,8 @@ const router = new Router({
             categories,
             projects,
             userManage,
-            order
+            order,
+            financing
           ],
           meta: {
             requiresAuth: true

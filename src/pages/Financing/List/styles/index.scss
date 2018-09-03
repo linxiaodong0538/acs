@@ -1,0 +1,41 @@
+@import "../../../../styles/utils/index";
+
+.header {
+  background: #f8f8f9;
+  line-height: 48px;
+  padding-left: 10px;
+}
+
+.ivu-row {
+  margin: 20px 0 30px 0;
+  .ivu-card-body {
+    p {
+      padding-left: 20%;
+    }
+
+    h3 {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 400;
+      padding-top: 20px;
+    }
+  }
+}
+
+.search {
+  position: static !important;
+  margin-bottom: 20px;
+
+  .ivu-select {
+    margin-left: 20px;
+  }
+
+  .ivu-date-picker {
+    margin-left: 50px;
+  }
+}
+
+.date-style {
+    font-size: 16px;
+   padding: 0 0 5px 5px;
+}

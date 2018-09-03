@@ -38,7 +38,7 @@ export default [
   },
   {
     icon: 'android-desktop',
-    name: 'website',
+    name: 'order',
     title: '订单管理',
     children: [
       {
@@ -49,12 +49,12 @@ export default [
   },
   {
     icon: 'android-desktop',
-    name: 'website',
+    name: 'financing',
     title: '财务管理',
     children: [
       {
         title: '财务管理',
-        route: '/website/news/news/articles/categories'
+        route: '/financing/list'
       }
     ]
   }
