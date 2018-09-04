@@ -4,17 +4,16 @@
      <CListHeader>用户详细</CListHeader>
       <table>
           <tbody>
-            <tr><td >用户昵称</td><td >{{users[0].age}}</td> <td >用户头像</td><td ><img :src='users[0].img' alt=""></td> </tr>
-            <tr><td >用户昵称</td><td >{{users[0].age}}</td> <td >用户头像</td><td >{{users[0].test1}}</td> </tr>
-            <tr><td >用户昵称</td><td >{{users[0].age}}</td> <td >用户头像</td><td >{{users[0].test1}}</td> </tr>
-            <tr><td >用户昵称</td><td >{{users[0].age}}</td> <td >用户头像</td><td >{{users[0].test1}}</td> </tr>
-            <tr><td >用户昵称</td><td >{{users[0].age}}</td> <td >用户头像</td><td >{{users[0].test1}}</td> </tr>
-            <tr><td >用户昵称</td><td >{{users[0].age}}</td> <td >用户头像</td><td >{{users[0].test1}}</td> </tr>
-            <tr><td >用户昵称</td><td colspan="3">{{users[0].age}}</td></tr>
+            <tr><td >用户昵称</td><td >{{detail.nickname}}</td> <td >用户头像</td><td ><img :src='detail.avatar' alt=""></td> </tr>
+            <tr><td >性别</td><td >{{detail.gender}}</td> <td >测试完成次数</td><td >{{detail.usetimes}}</td> </tr>
+            <tr><td >加入时间</td><td >{{detail.regtime | fromDate}}</td> <td >分享次数</td><td >{{detail.sharetimes}}</td> </tr>
+            <tr><td >手机号</td><td >{{detail.phone}}</td> <td >付费次数</td><td >{{detail.paytimes}}</td> </tr>
+            <tr><td >赠送次数</td><td ></td> <td >接受赠送次数</td><td ></td></tr>
+            <tr><td >最后一次打开时间</td><td >{{detail.lasttime | fromDate}}</td> <td ></td><td ></td></tr>
+            <tr><td >参与的测试主题</td><td colspan="3"></td></tr>
           </tbody>
       </table>
 </div>
-   
 </template>
     <script>
 import { mapState } from 'vuex'
@@ -28,46 +27,24 @@ export default {
     CListHeader
   },
   data () {
-    return {
-      users: [
-        {
-          name: '李磊',
-          age: '25',
-          school: '洛阳理工',
-          aa: '12',
-          xb: '男',
-          iphone: '11111',
-          test1: '测试',
-          test2: '测试1',
-          test3: '测试2',
-          test4: '测试3',
-          test5: '测试4',
-          test6: '测试5',
-          img: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKqJ9k8UI3xCuJiacgNb1ibYj7OS8JMMYqswYAKrL3K6bVUZHgvNHp6vmp5CsgDB36E3mrxwjm8nWow/132'
-        }
-      ]
-    }
+    return { }
   },
   created () {
     this.getDetail()
   },
   computed: {
     ...mapState({
-      list: state => state[module].list
+      detail: state => state[module].detail
     })
   },
   methods: {
-    // getList (current = 1) {
-    //   // this.List.page.current = current
-    //   return this.$store.dispatch(`${module}/getList`, {
-    //     query: {
-    //       offset: (current - 1) * this.consts.PAGE_SIZE,
-    //       limit: 49
-    //     }
-    //   })
-    // },
     getDetail () {
-      return this.$store.dispatch(`${module}/getDetail`, { id: 1 })
+      return this.$store.dispatch(`${module}/getDetail`, { id: 4 })
+    }
+  },
+  filters: {
+    fromDate: value => {
+      return new Date(parseInt(value) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ')
     }
   },
   mounted () {}

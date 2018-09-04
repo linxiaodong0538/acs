@@ -5,7 +5,7 @@ export default {
   getList ({ commit }, { query }) {
     return new Promise(resolve => {
       new Model().addPath('list').GET({ query }).then((res) => {
-        const data = { total: 1, items: res.data[0] }
+        const data = { total: res.data[0].length, items: res.data[0] }
         commit(types.GET_MANAGES, { data })
         resolve(data)
       })
@@ -14,7 +14,7 @@ export default {
 
   getDetail ({ commit }, { id }) {
     return new Model().GET({ id }).then((res) => {
-      commit(types.GET_MANAGE, {data: res.data})
+      commit(types.GET_MANAGE, {data: res.data[0].user})
     })
   }
 

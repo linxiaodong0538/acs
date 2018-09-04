@@ -1,6 +1,6 @@
 <template>
   <div>
-     <CList :columns="columns1" :data="list.items" :total="list.total">
+     <CList :columns="columns1" :data="list.items" :total="list.total" :current="page.current" @on-page-change="handlePageChange">
           <CListHeader>订单管理</CListHeader>
           <Row>
             <Col span="24">
@@ -111,7 +111,10 @@ export default {
             )
           }
         }
-      ]
+      ],
+      page: {
+        current: 1
+      }
     }
   },
   created () {
@@ -128,20 +131,23 @@ export default {
 
   methods: {
     getList (current = 1) {
-      // this.List.page.current = current
-      return this.$store.dispatch(`${module}/getList`, {})
+      this.page.current = current
+      return this.$store.dispatch(`${module}/getList`, {
+        query: {
+          offset: (current - 1) * this.consts.PAGE_SIZE,
+          limit: this.consts.PAGE_SIZE
+        }
+      })
     },
     handleDetail (index) {
       this.detail = this.list.items[index]
       this.modal = true
-      // this.$Modal.confirm({
-      //   title: '订单详细',
-      //   content: `订单号:${this.list.items[index].sn}<br>类型:${this.list.items[index].optype}<br>
-      //   订单号:${this.list.items[index].sn}<br>订单号:${this.list.items[index].sn}<br>
-      //   订单号:${this.list.items[index].sn}<br>订单号:${this.list.items[index].sn}<br>`
-      // })
+    },
+    handlePageChange (current) {
+      this.getList(current)
     }
   },
+
   mounted () {}
 }
 </script>

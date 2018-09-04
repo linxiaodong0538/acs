@@ -1,6 +1,6 @@
 <template>
 <div>
-    <CList :columns='columns' :data='list.items'>
+    <CList :columns='columns' :data='list.items' :total="list.total" :current="page.current" @on-page-change="handlePageChange">
         <CListHeader>用户管理</CListHeader>
         <CListSearch>
             <Input placeholder="请输入搜索关键词" style="width: 200px" />
@@ -95,7 +95,10 @@ export default {
             )
           }
         }
-      ]
+      ],
+      page: {
+        current: 1
+      }
     }
   },
   created () {
@@ -112,15 +115,17 @@ export default {
 
   methods: {
     getList (current = 1) {
-      // this.List.page.current = current
+      this.page.current = current
       return this.$store.dispatch(`${module}/getList`, {
         query: {
           offset: (current - 1) * this.consts.PAGE_SIZE,
-          limit: 49
+          limit: this.consts.PAGE_SIZE
         }
       })
     },
-    handlePageChange () {}
+    handlePageChange (current) {
+      this.getList(current)
+    }
   },
   mounted () {}
 }

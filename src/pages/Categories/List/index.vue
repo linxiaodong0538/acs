@@ -3,8 +3,8 @@
     <CList
       :columns="List.columns"
       :data="list.items"
-      :page-total="list.total"
-      :page-current="List.page.current"
+      :total="list.total"
+      :current="List.page.current"
       @on-page-change="handlePageChange">
       <CListHeader>
         <CListOperations>
