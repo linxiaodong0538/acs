@@ -18,6 +18,10 @@ export default [
       {
         title: '测试题列表',
         route: '/projects/list'
+      },
+      {
+        title: '测试题基础信息配置页',
+        route: '/projects/deploy'
       }
     ]
   },

@@ -5,7 +5,6 @@ export default {
     path: 'list',
     component: resolve => require(['@/pages/UserManage/List'], resolve)
   },
-
   {
     path: 'detail',
     component: resolve => require(['@/pages/UserManage/Detail'], resolve)
