@@ -102,6 +102,21 @@
               }
             },
             {
+              title: '推荐',
+              key: '',
+              width: 200,
+              render: (h, params) => {
+                const recommendMap = this.consts.MAPS.PROJECTS.RECOMMEND
+                let array = []
+
+                params.row.isbaner && array.push(recommendMap.isbaner)
+                params.row.ishot && array.push(recommendMap.ishot)
+                params.row.isfriend && array.push(recommendMap.isfriend)
+
+                return h('span', null, array.join('、'))
+              }
+            },
+            {
               title: '操作',
               key: 'action',
               width: 150,
