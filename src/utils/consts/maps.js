@@ -7,6 +7,11 @@ export default {
     STATUSES: {
       0: '下架',
       1: '上架'
+    },
+    RECOMMEND: {
+      isbaner: 'banner',
+      ishot: '热门',
+      isfriend: '朋友都在测'
     }
   },
   USERMANAGE: {
