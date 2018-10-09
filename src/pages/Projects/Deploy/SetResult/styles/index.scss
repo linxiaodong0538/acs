@@ -1,0 +1,61 @@
+@import '../../../../../styles/global/index';
+
+.set-result {
+    border:1px solid #cdcdcd;
+    width: 50%;
+    position: relative;
+  .set-result_title {
+      padding: 20px;
+  }
+  .set-result_item {
+    .item-header {
+        background: #D4D4D4;
+        padding: 8px;
+    }
+    .item-form {
+        p {
+            margin-top: 10px;
+            padding-left: 10px;
+        }
+       .item-form_text {
+           margin-bottom:30px;
+       } 
+    }
+  }
+ 
+    .handle-add {
+        width: 120px;
+        height: 30px;
+        line-height: 30px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        text-align: center;
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+        color: #FF9800;
+        cursor: pointer;
+        i {
+            position: absolute;
+            left:5px;
+            top:0;
+            font-size: 28px;
+            font-weight: 800;
+        }
+    }
+}
+.save {
+    position: absolute;
+    transform: translateX(-50%);
+    left:50%;
+    bottom:-100px;
+    margin-bottom:20px;
+    cursor: pointer;
+    span {
+      border: 1px solid #ccc;
+      padding: 8px 15px;
+      border-radius: 5px;
+      color:#FF9800
+    }
+    
+}

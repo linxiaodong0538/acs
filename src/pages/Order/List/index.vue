@@ -131,6 +131,7 @@ export default {
 
   methods: {
     getList (current = 1) {
+      console.log(current)
       this.page.current = current
       return this.$store.dispatch(`${module}/getList`, {
         query: {

@@ -24,6 +24,10 @@ export default {
           component: resolve => require(['@/pages/Projects/Deploy/SetBase'], resolve)
         }
       ]
+    },
+    {
+      path: 'picture',
+      component: resolve => require(['@/pages/Projects/Picture'], resolve)
     }
   ]
 }

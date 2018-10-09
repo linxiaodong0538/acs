@@ -22,6 +22,10 @@ export default [
       {
         title: '测试题基础信息配置页',
         route: '/projects/deploy'
+      },
+      {
+        title: '图片编辑框',
+        route: '/projects/picture'
       }
     ]
   },

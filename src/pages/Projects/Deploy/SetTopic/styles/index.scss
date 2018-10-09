@@ -1,0 +1,43 @@
+@import '../../../../../styles/global/index';
+
+.set-topic {
+    padding: 20px;
+    border: 1px solid #cdcdcd;
+    width: 50%;
+    .set-topic_title {
+        span {
+            padding-right: 20px;
+        }
+    }
+    .set-topic_select {
+        margin: 40px 0 0 40px;
+        span {
+            padding-right: 10px;
+        }
+        .select-jump {
+            color:#ccc;
+            padding-left: 10px;
+        }
+        .input-last {
+            padding-left: 10px;
+        }
+    }
+    .handle {
+        width: 150px;
+        height: 30px;
+        line-height: 30px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-top:50px;
+        text-align: center;
+        position: relative;
+        color: #FF9800;
+        cursor: pointer;
+        i {
+            position: absolute;
+            left:5px;
+            top:0;
+            font-size: 28px;
+        }
+    }
+}

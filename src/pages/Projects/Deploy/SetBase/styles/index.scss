@@ -1,0 +1,52 @@
+@import '../../../../../styles/utils/index';
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  visibility: hidden;
+  clear: both;
+}
+
+.set-base {
+  .form {
+    margin-top: 50px;
+  }
+
+  .offset-wrap {
+    .offset-wrap_item {
+      float: left;
+    }
+  }
+
+  .recommend {
+    overflow: hidden;
+    position: relative;
+    height: 100px;
+    .ivu-form-item {
+      float: left;
+      position: absolute;
+      left: 0;
+      top:50%;
+      transform: translateY(-50%);
+      &:nth-child(1) {
+        left:40px;
+    }
+      &:nth-child(2) {
+          left:100px
+      }
+      &:nth-child(3) {
+        left:280px
+    } 
+    &:nth-child(4) {
+        left:500px;
+    }     
+    }
+  }
+  .person-card {
+      margin:0 0 40px 20px;
+    .ivu-form-item {
+        float: left;
+    }
+  }
+}
