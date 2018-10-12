@@ -59,7 +59,7 @@
       },
       update (route) {
         const path = route ? route.path : this.$route.path
-        console.log(path)
+        // console.log(path)
         const paths = path.split('/')
         this.openNames = [paths[1]]
         this.activeName = `/${paths[1]}/${paths[2]}`

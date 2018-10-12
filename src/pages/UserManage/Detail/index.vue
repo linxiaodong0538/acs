@@ -27,9 +27,12 @@ export default {
     CListHeader
   },
   data () {
-    return { }
+    return {}
   },
   created () {
+    this.getDetail()
+  },
+  activated () {
     this.getDetail()
   },
   computed: {
@@ -39,7 +42,8 @@ export default {
   },
   methods: {
     getDetail () {
-      return this.$store.dispatch(`${module}/getDetail`, { id: 4 })
+      let userid = Number(this.$route.query.id)
+      return this.$store.dispatch(`${module}/getDetail`, { id: userid })
     }
   },
   filters: {

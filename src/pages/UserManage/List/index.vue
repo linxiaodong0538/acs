@@ -87,7 +87,8 @@ export default {
                 },
                 on: {
                   click: () => {
-                    this.$router.push('/userManage/detail')
+                    let userid = params.row.id
+                    this.$router.push('/userManage/detail?id= ' + userid + ' ')
                   }
                 }
               },

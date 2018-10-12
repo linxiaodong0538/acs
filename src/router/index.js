@@ -47,7 +47,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   iView.LoadingBar.start()
-
+  console.log(to)
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!auth.loggedIn()) {
       next({
