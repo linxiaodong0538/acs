@@ -34,13 +34,13 @@
       <div class="recommend">
         <span class="ivu-form-item">推荐</span>
         <FormItem label="推荐到banner" prop="isbaner">
-          <i-switch v-model="formValidate.isbanner"></i-switch>
+          <i-switch v-model="formValidate.isbanner" :false-value="Number(0)" :true-value="Number(1)"></i-switch>
         </FormItem>
         <FormItem label="推荐到热门" prop="ishot">
-          <i-switch v-model="formValidate.ishot"></i-switch>
+          <i-switch v-model="formValidate.ishot" :false-value="Number(0)" :true-value="Number(1)"></i-switch>
         </FormItem>
         <FormItem label="推荐到好友都在测" prop="isfriend">
-          <i-switch v-model="formValidate.isfriend"></i-switch>
+          <i-switch v-model="formValidate.isfriend" :false-value="Number(0)" :true-value="Number(1)"></i-switch>
         </FormItem>
       </div>
       <div class="person-card clearfix">
@@ -124,6 +124,7 @@
             if (valid) {
               this.sendData()
               this.$Message.success('提交成功!')
+              this.$refs[name].resetFields()
             }
           })
         },
