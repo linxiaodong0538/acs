@@ -23,6 +23,12 @@ export default {
   post ({ commit }, { id, body }) {
     return new Model().POST({ id, body })
   },
+  postRes ({ commit }, { id, body }) {
+    return new Model().addPath('result').POST({ id, body })
+  },
+  postTopic ({ commit }, { id, body }) {
+    return new Model().addPath('question').POST({ id, body })
+  },
 
   put ({ commit }, { id, body }) {
     return new Model().POST({ id, body })

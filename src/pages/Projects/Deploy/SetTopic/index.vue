@@ -26,6 +26,7 @@
 </template>
 
 <script>
+    const module = 'projects'
     export default {
       data () {
         return {
@@ -38,7 +39,14 @@
         }
       },
       methods: {
-        addTopic () {}
+        addTopic () {
+          return this.$store.dispatch(`${module}/postTopic`,
+            {
+              id: 6,
+              body: {subject: 'test fisrst', id: 1, size: 1, option: [{id: 0, option: 'ption 1', answerid: 0, nextquesid: 0}]}
+            }
+          )
+        }
       }
 }
 </script>

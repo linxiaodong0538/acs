@@ -124,7 +124,6 @@
             if (valid) {
               this.sendData()
               this.$Message.success('提交成功!')
-              this.$refs[name].resetFields()
             }
           })
         },
