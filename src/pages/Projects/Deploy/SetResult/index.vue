@@ -52,7 +52,7 @@
     },
     methods: {
       handleSave () {
-        return this.$store.dispatch(`${module}/postRes`,
+        this.$store.dispatch(`${module}/postRes`,
           {
             id: 1,
             body: {
@@ -63,18 +63,12 @@
         )
       },
       addRes () {
-        this.test.push({
-          id: this.test.length + 1,
-          title: '',
-          content: ''
-        })
+        const oRes = {id: this.test.length + 1, title: '', content: ''}
+        this.test.push(oRes)
       },
       handleDel (index) {
-        if (this.test.length > 3) {
-          this.test.splice(index, 1)
-        } else {
-          this.$Message.warning('该项目已经有销售记录,不允许删除!')
-        }
+        this.handleSave()
+        this.test.splice(index, 1)
       }
     }
   }
